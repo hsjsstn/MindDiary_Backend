@@ -15,4 +15,7 @@ class Emotions(BaseModel):
 class ReportRes(BaseModel):
     mood: str
     emotions: Emotions    
+
+class CommentRes(BaseModel):
+    comment: str
     

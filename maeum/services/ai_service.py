@@ -3,7 +3,8 @@ import os, re, json
 from pydantic import BaseModel, Field
 from groq import Groq
 from dotenv import load_dotenv
-from maeum.schemas.ai import DiaryReq, Emotions, ReportRes
+from maeum.schemas.ai import DiaryReq, Emotions, ReportRes, CommentRes
+
 from maeum.core.config import settings
 
 async def make_report(req: DiaryReq):
@@ -54,6 +55,35 @@ async def make_report(req: DiaryReq):
         }
         mood = data.get("mood", "")
 
-        return {"mood": mood, "emotions": normalized}
+        return ReportRes(mood=mood, emotions=normalized) #{"mood": mood, "emotions": normalized}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Groq 호출 실패: {e}")    
+    
+
+async def make_comment(req: DiaryReq):
+    client = settings.client
+
+    try:
+        COM_SYS = (
+            "너는 초등학교 선생님 처럼 일기를 읽고 코멘트를 달아야해"
+            "최대한 공감과 격려를 하면서 일기에 대한 5~6줄짜리 코멘트 작성해줘."
+            f"일기 주인의 이름은 {req.name}이야."
+        )
+        comment_res = client.chat.completions.create (
+        messages=[
+            {"role": "system", "content": COM_SYS},
+            {"role": "user", "content": req.content}
+        ],
+        model="openai/gpt-oss-120b",
+        temperature=1,
+        max_completion_tokens=1024,
+        top_p=1,
+        stream=False,
+        stop=None
+        )
+
+        comment = comment_res.choices[0].message.content
+        return CommentRes(comment=comment) #{"comment": comment}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Groq 호출 실패: {e}")
