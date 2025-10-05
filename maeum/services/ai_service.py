@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from groq import Groq
 from dotenv import load_dotenv
 from maeum.schemas.ai import DiaryReq, Emotions, ReportRes, CommentRes
+
 from maeum.core.config import settings
 
 async def make_report(req: DiaryReq):
