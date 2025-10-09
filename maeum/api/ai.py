@@ -14,7 +14,7 @@ async def diaryemotion_analysis(
 ):
     analysis_result = await ai_service.make_report(req)
 
-      return analysis_result  
+    return analysis_result  
 
 @router.post("/generate-comment", response_model=CommentRes)
 async def generate_commnet(
