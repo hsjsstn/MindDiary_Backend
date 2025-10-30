@@ -8,7 +8,7 @@ from fastapi import Depends
 router = APIRouter(prefix="/ai", tags=["AI 처리 API"])
 
 @router.post("/diaryemotion-analysis", response_model=ReportRes)
-async def diaryemotion_analysis(
+async def post_diaryemotion_analysis(
     req: DiaryReq,
     # db: AsyncSession = Depends(get_db)
 ):
@@ -17,7 +17,7 @@ async def diaryemotion_analysis(
     return analysis_result  
 
 @router.post("/generate-comment", response_model=CommentRes)
-async def generate_commnet(
+async def post_generate_commnet(
     req: DiaryReq,
 
 ):
