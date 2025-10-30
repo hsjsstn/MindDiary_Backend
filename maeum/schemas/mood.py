@@ -11,7 +11,7 @@ class PieChart(BaseModel):
     labels: List[str]
     values: List[float]
 
-class MonthlyStatistics(BaseModel):
+class MonthlyStatisticsRes(BaseModel):
     period: str
     user_id: UUID
     total_entries: int
@@ -21,3 +21,6 @@ class MonthlyStatistics(BaseModel):
     weekly_dominants: List[WeeklyItem]       
     comment: str        
     recommendations: List[str] = []
+
+class WeatherReq(BaseModel):
+    user_id: UUID
