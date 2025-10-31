@@ -10,7 +10,8 @@ class User(Base):
     __tablename__="user"
     user_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     email = Column(String, unique=True)
-    nickname = Column(String, unique=True, index=True)
+    nickname = Column(String, index=True)  # 닉네임은 중복 허용
+    password = Column(String, nullable=False)  # 비밀번호 (평문 저장)
     created_at = Column(DateTime, default=datetime.datetime.now)
 
     app_setting = relationship("AppSetting", back_populates="user")
