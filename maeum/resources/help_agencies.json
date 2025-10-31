@@ -1,0 +1,142 @@
+[
+  {
+    "name": "자살예방상담전화",
+    "phone": "109",
+    "type": "phone",
+    "description": "",
+    "link": "tel:109"
+  },
+  {
+    "name": "정신건강상담전화",
+    "phone": "1577-0199",
+    "type": "phone",
+    "description": "",
+    "link": "tel:15770199"
+  },
+  {
+    "name": "보건복지상담센터",
+    "phone": "129",
+    "type": "phone",
+    "description": "",
+    "link": "tel:129"
+  },
+  {
+    "name": "한국생명의전화",
+    "phone": "1588-9191",
+    "type": "phone",
+    "description": "",
+    "link": "tel:15889191"
+  },
+  {
+    "name": "청소년사이버상담센터",
+    "phone": "지역번호-1388",
+    "type": "mixed",
+    "description": "전화, 문자, 온라인 상담 가능",
+    "link": "http://www.cyber1388.kr"
+  },
+  {
+    "name": "청소년모바일상담센터 다들어줄개",
+    "phone": "1661-5004",
+    "type": "mixed",
+    "description": "문자, 카카오톡 플러스친구, 어플, 페이스북 메세지 상담 가능능",
+    "link": "tel:16615004"
+  },
+  {
+    "name": "한국생명존중희망재단",
+    "phone": "02-3706-0500",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.kfsp.or.kr"
+  },
+  {
+    "name": "서울시자살예방센터",
+    "phone": "02-3458-1000",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.suicide.or.kr"
+  },
+  {
+    "name": "경기도자살예방센터",
+    "phone": "031-212-0437",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.mentalhealth.or.kr"
+  },
+  {
+    "name": "인천광역시자살예방센터",
+    "phone": "032-468-9917",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.ispc.or.kr"
+  },
+  {
+    "name": "강원특별자치도자살예방센터",
+    "phone": "033-251-1970",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.gwmh.or.kr"
+  },
+  {
+    "name": "충청북도광역자살예방센터",
+    "phone": "043-217-0597",
+    "type": "phone",
+    "description": "",
+    "link": "http://cbsmind.or.kr"
+  },
+  {
+    "name": "충청남도광역자살예방센터",
+    "phone": "041-566-9184",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.chmhc.or.kr"
+  },
+  {
+    "name": "대전광역자살예방센터",
+    "phone": "042-486-0005",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.djpmhc.or.kr"
+  },
+  {
+    "name": "광주자살예방센터",
+    "phone": "062-600-1930",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.gmhc.kr"
+  },
+  {
+    "name": "경상북도자살예방센터",
+    "phone": "054-748-6400",
+    "type": "phone",
+    "description": "",
+    "link": "http://gbmhc.or.kr"
+  },
+  {
+    "name": "대구광역자살예방센터",
+    "phone": "053-256-0199",
+    "type": "phone",
+    "description": "",
+    "link": "http://mental.dgmhc.or.kr"
+  },
+  {
+    "name": "울산광역자살예방센터",
+    "phone": "052-716-7199",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.usspc.or.kr"
+  },
+  {
+    "name": "부산광역자살예방센터",
+    "phone": "051-242-2575",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.bspc.kr"
+  },
+  {
+    "name": "제주특별자치도자살예방센터",
+    "phone": "064-717-3000",
+    "type": "phone",
+    "description": "",
+    "link": "http://www.jejumind.or.kr"
+  }
+]
