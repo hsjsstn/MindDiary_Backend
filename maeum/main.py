@@ -3,6 +3,7 @@ from fastapi import FastAPI
 # maum/api/endpoints/ai.py 파일의 라우터를 직접 임포트
 from maeum.api.ai import router as ai_router 
 from maeum.api.help import router as help_router
+from maeum.api.mood import router as mood_router
 # maum/database.database의 engine과 Base 임포트 (DB 초기화에 필요)
 # from maeum.database.database import engine, Base
 # from maeum.database import models  
@@ -15,8 +16,8 @@ app = FastAPI(title="마음일기 백엔드 API")
 #     async with engine.begin() as conn:
 #         await conn.run_sync(Base.metadata.create_all)
 
-# --- AI 라우터 직접 연결 ---
-# '/ai' 경로 접두사 없이 연결할 수 있지만, 여기서는 /ai 경로를 갖는다고 가정합니다.
 app.include_router(ai_router, prefix="", tags=["AI 처리 API"])
 
 app.include_router(help_router, prefix="", tags=["위험 상황 알림 API"])
+
+app.include_router(mood_router, prefix="", tag=["감정 API"])
