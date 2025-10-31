@@ -20,4 +20,4 @@ app.include_router(ai_router, prefix="", tags=["AI 처리 API"])
 
 app.include_router(help_router, prefix="", tags=["위험 상황 알림 API"])
 
-app.include_router(mood_router, prefix="", tag=["감정 API"])
+app.include_router(mood_router, prefix="", tags=["감정 API"])

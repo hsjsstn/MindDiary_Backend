@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from maeum.schemas.ai import DiaryReq, Emotions, ReportRes, CommentRes
 from maeum.services import ai_service # 위에서 만든 서비스 임포트
-# from maeum.database.database import get_db
+from maeum.database.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 
