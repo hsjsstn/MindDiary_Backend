@@ -16,15 +16,14 @@ async def create_mood_temperature(
     new_temperature = MoodTemperature( 
         temp_id = uuid.uuid4(),
         user_id = user_id,
-        entry_date = date.date.today(),
+        entry_date = date.today(),
         temperature = temperature,
         threshold_breach = threshold_breach,
-        create_at = date.datetime.now()
 
     )
-    db.add(new_temperature)
-    db.commit()
-    db.refresh(new_temperature)
+    await db.add(new_temperature)
+    await db.commit()
+    await db.refresh(new_temperature)
 
     return new_temperature
 

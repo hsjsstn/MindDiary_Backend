@@ -8,9 +8,9 @@ import random
 from sqlalchemy.ext.asyncio import AsyncSession
 from uuid import UUID
 
-from maeum.schemas.mood import MonthlyStatisticsRes, PieChart, WeeklyItem
+from maeum.schemas.mood import MonthlyStatisticsRes, PieChart, WeeklyItem, TemperatureRes
 from maeum.crud.journal_analysis import read_analysis_by_month, read_analysis_recent_n
-from maeum.crud.mood_temperature import read_mood_temperature
+from maeum.crud.mood_temperature import read_mood_temperature, create_mood_temperature
 
 EMOS = ["happy", "soso", "anxiety", "anger", "sadness"]
 LABELS = ["행복", "쏘쏘", "불안", "화남", "슬픔"]
@@ -179,4 +179,13 @@ async def weather(
         elif m=="sadness":
             yest_temperature-=2
 
+    if yest_temperature<=25:
+        threashold=False
+        
+    await create_mood_temperature(db, user_id, yest_temperature, threashold)
 
+async def temperature(db: AsyncSession, user_id: UUID):
+    mood_temperature = await read_mood_temperature(db, user_id)
+
+    temperature= mood_temperature.temperature
+    return TemperatureRes(temperature=temperature)

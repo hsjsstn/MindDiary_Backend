@@ -24,3 +24,6 @@ class MonthlyStatisticsRes(BaseModel):
 
 class WeatherReq(BaseModel):
     user_id: UUID
+
+class TemperatureRes(BaseModel):
+    temperature: float
