@@ -58,12 +58,4 @@ app.include_router(ai_router, prefix="", tags=["AI 처리 API"])
 
 app.include_router(help_router, prefix="", tags=["위험 상황 알림 API"])
 
-# 도움 기관 라우터 연결
-app.include_router(agency_router, prefix="", tags=["도움 기관 API"])
-
-# Journal 라우터 추가
-app.include_router(journal_router, prefix="", tags=["일기 처리 API"])
-
-# 감정 라우터 연결
-app.include_router(mood_router, prefix="", tag=["감정 API"])
-
+app.include_router(mood_router, prefix="", tags=["감정 API"])
