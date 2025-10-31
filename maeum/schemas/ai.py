@@ -1,9 +1,9 @@
 from pydantic import BaseModel, Field
 from typing import Optional
-import uuid
+from uuid import UUID
 
 class DiaryReq(BaseModel):
-    user_id: uuid
+    user_id: UUID
     content: str
     name: str
 

@@ -10,7 +10,8 @@ class User(Base):
     __tablename__="user"
     user_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     email = Column(String, unique=True)
-    nickname = Column(String, unique=True, index=True)
+    nickname = Column(String, index=True)  # 닉네임은 중복 허용
+    password = Column(String, nullable=False)  # 비밀번호 (평문 저장)
     created_at = Column(DateTime, default=datetime.datetime.now)
 
     app_setting = relationship("AppSetting", back_populates="user")
@@ -37,7 +38,7 @@ class MoodTemperature(Base):
     '''일 별 마음 온도 기록'''
     __tablename__ = "mood_temperature"
     temp_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey="user.user_id")
+    user_id = Column(UUID(as_uuid=True), ForeignKey("user.user_id"))
     entry_date = Column(Date)
     temperature = Column(Float)
     threshold_breach = Column(Boolean)
@@ -51,7 +52,7 @@ class AIComment(Base):
     comment_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
     comment = Column(Text)
     created_at = Column(DateTime, default=datetime.datetime.now)
-    journal_id = Column(UUID(as_uuid=True), ForeignKey="journal_entry.journal_id")
+    journal_id = Column(UUID(as_uuid=True), ForeignKey("journal_entry.journal_id"))
 
     journal_entry = relationship("JournalEntry", back_populates="ai_comment")
 
@@ -102,6 +103,7 @@ class MoodWeatherEnum(enum.Enum):
     cloudy = "Cloudy"
     thunder = "Thunder"
     rain = "Rain"
+    
 class JournalAnalysis(Base):
     __tablename__ = "journal_analysis"
     analysis_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
@@ -111,14 +113,14 @@ class JournalAnalysis(Base):
     anxiety = Column(Integer)
     anger = Column(Integer)
     sadness = Column(Integer)
-    journal_id = Column(UUID(as_uuid=True), ForeignKey="journal_entry.journal_id")
+    journal_id = Column(UUID(as_uuid=True), ForeignKey("journal_entry.journal_id"))
 
     journal_entry = relationship("JournalEntry", back_populates="journal_analysis")
 
 class AppSetting(Base):
     __tablename__ = "app_setting"
     setting_id = Column(UUID(as_uuid=True), primary_key=True, index=True)
-    user_id = Column(UUID(as_uuid=True), ForeignKey="user.user_id")
+    user_id = Column(UUID(as_uuid=True), ForeignKey("user.user_id"))
     notification_opt_in = Column(Boolean)
     updated_at = Column(DateTime, default=datetime.datetime.now)
 
@@ -131,3 +133,5 @@ class HelpAgency(Base):
     region = Column(String)
     phone = Column(String)
     url = Column(String)
+
+
