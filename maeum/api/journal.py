@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime
 
 
-router = APIRouter(prefix="/journals", tags=["Journal API"])
+router = APIRouter(prefix="/journals", tags=["일기 API"])
 
 @router.post("/", response_model=JournalEntryResponse)
 async def create_journal(journal: JournalCreate, db: AsyncSession = Depends(get_db)):

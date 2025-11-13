@@ -2,11 +2,11 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
-DB_USER = os.getenv("DB_USER")
-DB_PW = os.getenv("DB_PW") 
-DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER", "myuser")
+DB_PW = os.getenv("DB_PW", "mypassword") 
+DB_HOST = os.getenv("DB_HOST", "postgres-service")
 DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("DB_NAME")
+DB_NAME = os.getenv("DB_NAME", "mydb")
 
 SQLALCHEMY_DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PW}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 

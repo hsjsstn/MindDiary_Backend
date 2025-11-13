@@ -1,6 +1,8 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
+
+from maeum.schemas.mood import WeeklyItem
 
 class DiaryReq(BaseModel):
     user_id: UUID
@@ -21,3 +23,11 @@ class ReportRes(BaseModel):
 class CommentRes(BaseModel):
     comment: str
     
+class RecommendReq(BaseModel):
+    dominant_mood: str
+    weekly_mood: List[WeeklyItem]
+    total_journal: int
+
+class RecommendRes(BaseModel):
+    review: str
+    recommend: str

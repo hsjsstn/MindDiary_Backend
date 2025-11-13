@@ -7,7 +7,7 @@ from maeum.schemas.user import UserResponse
 # UserCreate는 /auth/signup에서 사용
 
 # 라우터 정의
-router = APIRouter(prefix="/users", tags=["User API"])
+router = APIRouter(prefix="/users", tags=["사용자 API"])
 
 # 회원가입은 /auth/signup 사용
 

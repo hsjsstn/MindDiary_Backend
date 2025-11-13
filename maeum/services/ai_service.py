@@ -3,7 +3,8 @@ import os, re, json
 from pydantic import BaseModel, Field
 from groq import Groq
 from dotenv import load_dotenv
-from maeum.schemas.ai import DiaryReq, Emotions, ReportRes, CommentRes
+
+from maeum.schemas.ai import DiaryReq, Emotions, ReportRes, CommentRes, RecommendRes, RecommendReq
 
 from maeum.core.config import settings
 
@@ -84,6 +85,59 @@ async def make_comment(req: DiaryReq):
 
         comment = comment_res.choices[0].message.content
         return CommentRes(comment=comment) #{"comment": comment}
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Groq 호출 실패: {e}")
+
+
+async def make_recommend(req: RecommendReq):
+    client = settings.client
+
+    try:
+        COM_SYS = (
+            "너는 월간 일기통계를 분석하는 심리 코치다. "
+            "반드시 JSON으로만 답하라. "
+            "해당 월의 대표감정, 주차별 대표 감정, 총 일기 수를 통해 종합적으로 분석하여 일기 작성자의 감정의 흐름을 파악해라."
+            "출력 형식:\n"
+            "{\n"
+            "    \"review\": \"해당 월의 감정 통계를 보고 공감과 위로와 격려의 한줄평\",\n"
+            "    \"recommend\": \"해당 월의 대표 감정에 대한 행동 추천 3가지\",\n"
+            "}\n"
+        )
+        comment_res = client.chat.completions.create (
+        messages=[
+            {"role": "system", "content": COM_SYS},
+            {"role": "user", "content": (
+                f"대표 감정: {req.dominant_mood}\n"
+                f"주차별 감정: {[f'{w.week_index}주차: {w.dominant_emotion}' for w in req.weekly_mood]}\n"
+                f"총 일기 수: {req.total_journal}"
+            )}
+        ],
+        model="openai/gpt-oss-120b",
+        temperature=1,
+        max_completion_tokens=1024,
+        top_p=1,
+        stream=False,
+        stop=None
+        )
+
+        raw = comment_res.choices[0].message.content.strip()
+
+        # JSON 파싱 (GPT가 JSON 외의 문장 섞었을 경우 대비)
+        try:
+            parsed = json.loads(raw)
+        except json.JSONDecodeError:
+            import re
+            json_text = re.search(r'\{[\s\S]*\}', raw)
+            if not json_text:
+                raise ValueError("GPT 응답에서 JSON을 찾을 수 없음")
+            parsed = json.loads(json_text.group())
+
+        # RecommendRes 모델에 매핑
+        return RecommendRes(
+            review=parsed.get("review", "리뷰 생성 실패"),
+            recommend=parsed.get("recommend", "추천 생성 실패")
+        )
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Groq 호출 실패: {e}")

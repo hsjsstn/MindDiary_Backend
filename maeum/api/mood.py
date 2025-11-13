@@ -9,7 +9,7 @@ from maeum.services.mood_service import statistics_monthly, weather, temperature
 router = APIRouter(prefix="/mood", tags=["감정 API"])
 
 @router.get("/statistics/monthly", response_model=MonthlyStatisticsRes)
-async def statistics_monthly(
+async def get_statistics_monthly(
     db: AsyncSession = Depends(get_db),
     user_id: UUID = Query(...),
     year: int = Query(...),
@@ -21,7 +21,7 @@ async def statistics_monthly(
 @router.post("/weather")
 async def post_weather(
     req: WeatherReq,
-    db: AsyncSession = Depends(get_db),
+    db: AsyncSession = Depends(get_db), 
 ) :
     await weather(db, req.user_id, 7)
 

@@ -11,6 +11,8 @@ from uuid import UUID
 from maeum.schemas.mood import MonthlyStatisticsRes, PieChart, WeeklyItem, TemperatureRes
 from maeum.crud.journal_analysis import read_analysis_by_month, read_analysis_recent_n
 from maeum.crud.mood_temperature import read_mood_temperature, create_mood_temperature
+from maeum.services.ai_service import make_recommend
+from maeum.services.
 
 EMOS = ["happy", "soso", "anxiety", "anger", "sadness"]
 LABELS = ["행복", "쏘쏘", "불안", "화남", "슬픔"]
@@ -127,6 +129,8 @@ async def statistics_monthly(
                 emotion_avg["anger"], emotion_avg["sadness"]]
     )
 
+    ai_request = Recommend
+    ai_result = make_recommend()
     comment = f"이번달 대표 감정은 {dominant_emotion}입니다."
     kr_to_en = {v: k for k, v in EMO_KR.items()}
     winner_key = kr_to_en.get(dominant_emotion)
